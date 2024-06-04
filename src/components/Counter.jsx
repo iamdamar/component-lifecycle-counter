@@ -4,14 +4,21 @@ const Counter = ({finishGame}) => {
     const [count, setCount] = useState(0)
     
     useEffect(() => {
-        console.log('rendered')
+        window.addEventListener('keydown', handleKeyPress)
         return () => {
-            console.log('cleaned up')
+            window.removeEventListener('keydown', handleKeyPress)
         }
-    }, [])
+    }, [count])
 
     const handleClick = () => {
         setCount(count + 1)
+    }
+
+    const handleKeyPress = (event) => {
+        const {key} = event
+        if (key === 'Enter') {
+            setCount(count + 1)
+        }
     }
 
     return (
